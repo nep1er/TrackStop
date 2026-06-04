@@ -1,0 +1,58 @@
+﻿<Application x:Class="TrackStop.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:TrackStop"
+             StartupUri="Views/LoginWindow.xaml"
+             xmlns:converters="clr-namespace:TrackStop.Converters">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Material Design Bundled Theme -->
+                <materialDesign:BundledTheme BaseTheme="Light"
+                             PrimaryColor="Red"
+                             SecondaryColor="Amber" />
+
+                <!-- Material Design Defaults -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+
+                <!-- Применяем сохраненную тему после загрузки -->
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <!-- Эти темы будут заменены ThemeManager при запуске -->
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <!-- Конвертеры -->
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
+
+            <!-- Стиль сердечка -->
+            <Style x:Key="HeartButtonStyle" TargetType="ToggleButton" BasedOn="{StaticResource MaterialDesignIconButton}">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Foreground" Value="#FFFF0000"/>
+                                    <!-- Чистый ярко-красный -->
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Opacity" Value="0.8"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
